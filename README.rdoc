@@ -1,28 +1,311 @@
-== README
+== Project Overview
+This project parses the selective tags
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== Pre Requisites
+* Rails
+* sqlite
 
-Things you may want to cover:
+== Setting up the project
+* Clone from the repo
+run the following commands
+<tt>bundle install</tt>
+<tt>rake db:create</tt>
+<tt>rake db:migrate</tt>
+<tt>rails s</tt>
 
-* Ruby version
+These steps will setup the project and get you running
 
-* System dependencies
+== API routes
+There are two api routes
+* /scrape (which accepts a url and parse selective tags)
+<tt>http://localhost:3000/scrape?url="you url"</tt>
 
-* Configuration
+* /list (which show all previous urls and their scraped content)
+<tt>http://localhost:3000/list</tt>
 
-* Database creation
+== About the table 
+Table name is =Content
+=== Attributes
+* source_link (url which is beign scraped)
+* h1 (array of all the h1 content in the page)
+* h2 (array of all the h2 content in the page)
+* h3 (array of all the h3 content in the page)
+* extracted_hrefs (array of all the href's content in the page)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+A sample response of the API
+<tt>{
+  "message": "Url Parsed",
+  "data": {
+    "source_link": "https://www.telenor.com.pk/personal/devices/3g-device-check",
+    "h1": [
+      "3G Device Check"
+    ],
+    "h2": [
+      "Telenor Customer Care"
+    ],
+    "h3": [
+      "Packages",
+      "Top Offers",
+      "Offers",
+      "Get Talkshawk SIM",
+      "International",
+      "See Also",
+      "Top Offers",
+      "Packages",
+      "Offers",
+      "International",
+      "My djuice Offer",
+      "Get djuice SIM",
+      "Packages",
+      "Bundles",
+      "Offers",
+      "Get Postpaid SIM ",
+      "Devices",
+      "International",
+      "Billing",
+      "Internet",
+      "Top Internet Offers",
+      "3G Connect",
+      "See Also",
+      "Music & Video ",
+      "Apps & Games",
+      "Entertainment",
+      "Information",
+      "Utilities ",
+      "Sports",
+      "Social & Messaging",
+      "Education & Career",
+      "Health",
+      "Religion",
+      "Mobile Advertising",
+      "Telenor",
+      "Mobile Phones",
+      "3G Connect",
+      "Internet of Things",
+      "See Also",
+      "Buy Online",
+      "Feedback",
+      "About Telenor",
+      "Quick Links",
+      "Help and Support"
+    ],
+    "extracted_hrefs": [
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/djuice",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/talkshawk",
+      "https://www.telenor.com.pk/personal/talkshawk/packages",
+      "https://www.telenor.com.pk/personal/talkshawk/packages/talkshawkeconomy",
+      "https://www.telenor.com.pk/personal/talkshawk/packages/talkshawk-value-package",
+      "https://www.telenor.com.pk/personal/talkshawk/packages/talkshawk-a1",
+      "https://www.telenor.com.pk/personal/talkshawk/talkshawk-latest-offer",
+      "https://www.telenor.com.pk//personal/talkshawk/talkshawk-latest-offer/talkshawk-full-day-offer",
+      "https://www.telenor.com.pk/personal/internet/special-internet-offers/talkshawk-good-time-offer",
+      "https://www.telenor.com.pk//haftawar-sahulat-offer",
+      "https://www.telenor.com.pk//telenor-easycard",
+      "https://www.telenor.com.pk/personal/talkshawk/offers",
+      "https://www.telenor.com.pk/personal/talkshawk/offers/all-usage-offers",
+      "https://www.telenor.com.pk/personal/talkshawk/offers/call-offers",
+      "https://www.telenor.com.pk/personal/talkshawk/offers/internet-offers",
+      "https://www.telenor.com.pk/personal/talkshawk/offers/sms-offers",
+      "https://www.telenor.com.pk/personal/talkshawk/offers/international-dialing",
+      "https://www.telenor.com.pk/personal/talkshawk/talkshawk-sim",
+      "https://www.telenor.com.pk//personal/talkshawk/get-sim-talkshawk",
+      "https://www.telenor.com.pk/talkshawk/convert-to-telenor",
+      "https://www.telenor.com.pk/personal/talkshawk/international-roaming",
+      "https://www.telenor.com.pk/personal/talkshawk/international-direct-dialing",
+      "https://www.telenor.com.pk/personal/talkshawk/international-roaming",
+      "",
+      "https://www.telenor.com.pk/location-based-offers",
+      "https://www.telenor.com.pk/talkshawk/talkshawk-bundle-calculator",
+      "https://www.telenor.com.pk/djuice",
+      "https://www.telenor.com.pk/personal/djuice/djuice-top-offers",
+      "https://www.telenor.com.pk/personal/djuice/offers/online-deals",
+      "https://www.telenor.com.pk//personal/djuice/offers/all-usage-offers/weekly-offer",
+      "https://www.telenor.com.pk/personal/djuice/packages",
+      "https://www.telenor.com.pk/personal/djuice/packages/djuice-one-package",
+      "https://www.telenor.com.pk//personal/djuice/packages/djuice-team-package",
+      "https://www.telenor.com.pk//personal/djuice/packages/djuice-always-on",
+      "https://www.telenor.com.pk/personal/djuice/offers",
+      "https://www.telenor.com.pk/personal/djuice/offers/all-usage-offers",
+      "https://www.telenor.com.pk/personal/djuice/offers/call-offers",
+      "https://www.telenor.com.pk/personal/djuice/offers/sms-offers",
+      "https://www.telenor.com.pk/personal/djuice/offers/internet-offers",
+      "https://www.telenor.com.pk/personal/djuice/djuice-international-roaming",
+      "https://www.telenor.com.pk/personal/djuice/offers/international-call-offers",
+      "https://www.telenor.com.pk/personal/djuice/djuice-international-direct-dailing",
+      "https://www.telenor.com.pk/personal/djuice/djuice-international-roaming",
+      "https://www.telenor.com.pk/my-djuice-offer ",
+      "https://www.telenor.com.pk/personal/djuice/get-djuice-sim",
+      "https://www.telenor.com.pk//personal/djuice/get-sim-djuice",
+      "https://www.telenor.com.pk/djuice/convert-to-telenor",
+      "https://www.telenor.com.pk/postpaid",
+      "https://www.telenor.com.pk/personal/postpaid/packages",
+      "https://www.telenor.com.pk/personal/postpaid/packages/professional-smart-plans",
+      "https://www.telenor.com.pk/personal/postpaid/packages/professional-t-series-plans",
+      "https://www.telenor.com.pk/personal/postpaid/packages/data-sim",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-bundles",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-bundles/call-bundles",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-bundles/sms-bundles",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-bundles/internet-bundles",
+      "https://www.telenor.com.pk/personal/postpaid/offers",
+      "https://www.telenor.com.pk//personal/postpaid/offers/international-voice-bundle-5",
+      "https://www.telenor.com.pk/personal/postpaid/offers/postpaid-idd-me-offer",
+      "https://www.telenor.com.pk/personal/postpaid/offers/postpaid-usa-canada-offer",
+      "https://www.telenor.com.pk//personal/postpaid/postpaid-get-sim",
+      "https://www.telenor.com.pk//personal/postpaid/get-sim-postpaid",
+      "https://www.telenor.com.pk/postpaid/convert-to-telenor",
+      "https://www.telenor.com.pk/personal/postpaid/devices",
+      "https://www.telenor.com.pk/personal/postpaid/devices/mobile-phones",
+      "https://www.telenor.com.pk/telenor-companion-watch",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-international-roaming",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-idd",
+      "https://www.telenor.com.pk/personal/postpaid/postpaid-international-roaming",
+      "https://www.telenor.com.pk/personal/postpaid/bill-payment-options",
+      "https://www.telenor.com.pk/personal/postpaid/bill-payment-options",
+      "https://www.telenor.com.pk/personal/postpaid/bill-receiving-options",
+      "https://www.telenor.com.pk/internet",
+      "https://www.telenor.com.pk/personal/internet/3g-internet",
+      "https://www.telenor.com.pk/personal/internet/3g-internet/3g-daily-unlimited-internet-bundle",
+      "https://www.telenor.com.pk/personal/internet/3g-internet/3g-3day-bundle",
+      "https://www.telenor.com.pk/personal/internet/3g-internet/3g-weekly-unlimited-daytime",
+      "https://www.telenor.com.pk/personal/internet/3g-internet/3g-monthly-starter-bundle",
+      "https://www.telenor.com.pk/personal/internet/special-internet-offers",
+      "https://www.telenor.com.pk/personal/internet/special-internet-offers",
+      "https://www.telenor.com.pk//personal/djuice/offers/online-deals",
+      "https://www.telenor.com.pk//personal/internet/3g-internet/3g-daily-unlimited-internet-bundle",
+      "https://www.telenor.com.pk//personal/internet/3g-internet/3g-weekly-unlimited-daytime",
+      "https://www.telenor.com.pk//personal/internet/3g-connect",
+      "https://www.telenor.com.pk//personal/internet/3g-connect/3g-connect-daily",
+      "https://www.telenor.com.pk//personal/internet/3g-connect/3g-connect-introductory",
+      "https://www.telenor.com.pk//personal/internet/3g-connect/3g-connect-economy",
+      "https://www.telenor.com.pk//personal/internet/3g-connect/3g-connect-heavy",
+      "",
+      "https://www.telenor.com.pk//dms",
+      "https://www.telenor.com.pk/personal/internet/coveragemap",
+      "https://www.telenor.com.pk/personal/internet/3g-device-check",
+      "https://www.telenor.com.pk//hd-calling",
+      "https://www.telenor.com.pk/personal/digital-services-main",
+      "https://www.telenor.com.pk/personal/digital-services/music-video",
+      "https://www.telenor.com.pk/personal/digital-services/music-video/smart-tunes",
+      "https://www.telenor.com.pk/personal/digital-services/apps-games",
+      "https://www.telenor.com.pk/personal/digital-services/apps-games/telenor-apps",
+      "https://www.telenor.com.pk/personal/digital-services/entertainment",
+      "https://www.telenor.com.pk/personal/digital-services/entertainment/voiler",
+      "https://www.telenor.com.pk/personal/digital-services/entertainment/drama-station",
+      "https://www.telenor.com.pk/personal/digital-services/information",
+      "https://www.telenor.com.pk/personal/digital-services/information/mms-news",
+      "https://www.telenor.com.pk/personal/digital-services/information/telenor-live",
+      "https://www.telenor.com.pk/personal/digital-services/utilities",
+      "https://www.telenor.com.pk/personal/digital-services/utilities/emergency-load",
+      "https://www.telenor.com.pk/personal/digital-services/utilities/missed-call-alerts",
+      "https://www.telenor.com.pk/personal/digital-services/utilities/smart-number",
+      "https://www.telenor.com.pk/personal/digital-services/sports",
+      "https://www.telenor.com.pk/personal/digital-services/sports/cricket-alert-ds",
+      "https://www.telenor.com.pk/personal/digital-services/sports/football-alert",
+      "https://www.telenor.com.pk/personal/digital-services/social-messaging",
+      "https://www.telenor.com.pk/personal/digital-services/social-messaging/mms",
+      "https://www.telenor.com.pk/personal/digital-services/social-messaging/social-live",
+      "https://www.telenor.com.pk/personal/digital-services/education-career",
+      "https://www.telenor.com.pk/personal/digital-services/education-career/telenor-taleem",
+      "https://www.telenor.com.pk/personal/digital-services/education-career/rozgar",
+      "https://www.telenor.com.pk/personal/digital-services/health",
+      "https://www.telenor.com.pk/personal/digital-services/health/telenor-health",
+      "https://www.telenor.com.pk/personal/digital-services/religion",
+      "https://www.telenor.com.pk/personal/digital-services/religion/islamic-alerts",
+      "https://www.telenor.com.pk/personal/digital-services/religion/islamic-portal-786",
+      "https://www.telenor.com.pk/personal/digital-services/mobile-advertising",
+      "https://www.telenor.com.pk/personal/digital-services/mobile-advertising/bs-location-based-advertisement",
+      "https://www.telenor.com.pk/personal/digital-services/mobile-advertising/shop-alerts",
+      "https://www.telenor.com.pk/devices",
+      "https://www.telenor.com.pk/personal/devices/mobile-phones/telenor",
+      "https://www.telenor.com.pk//personal/devices/mobile-phones/telenor/telenor-smart-pro",
+      "https://www.telenor.com.pk//personal/devices/mobile-phones/telenor/telenor-smart-mini",
+      "https://www.telenor.com.pk//personal/devices/mobile-phones/telenor/telenor-smart-max",
+      "https://www.telenor.com.pk//personal/devices/mobile-phones/telenor/telenor-smart-zoom",
+      "https://www.telenor.com.pk//personal/devices/mobile-phones/telenor/telenor-star-3g",
+      "https://www.telenor.com.pk/personal/devices/mobile-phones",
+      "https://www.telenor.com.pk/personal/devices/mobile-phones/samsung",
+      "https://www.telenor.com.pk/personal/devices/iphone-6s",
+      "https://www.telenor.com.pk/personal/devices/iphone-6",
+      "https://www.telenor.com.pk/personal/devices/dongles/",
+      "https://www.telenor.com.pk/personal/devices/dongles/telenor-3g-connect",
+      "https://www.telenor.com.pk/personal/devices/dongles/telenor-3g-connect-wifi",
+      "https://www.telenor.com.pk//personal/devices/dongles/telenor-3g-mobile-wifi",
+      "https://www.telenor.com.pk//telenor-companion-watch",
+      "https://www.telenor.com.pk//telenor-companion-watch",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/personal/devices/3g-device-check",
+      "https://www.telenor.com.pk/personal/devices/coveragemap",
+      "https://www.telenor.com.pk/personal/devices/buy-online",
+      "https://www.telenor.com.pk/number-auction-category",
+      "https://www.telenor.com.pk/telenor-business",
+      "https://www.telenor.com.pk/telenor-business/karobar-packages",
+      "https://www.telenor.com.pk/telenor-business/karobar-bundles",
+      "https://www.telenor.com.pk/telenor-busines/business-solution",
+      "https://www.telenor.com.pk/telenor-business/international/business-international-roaming",
+      "https://www.telenor.com.pk/telenor-busines/business-digital-services/business-music-video",
+      "https://www.telenor.com.pk/telenor-business/contact-business-team",
+      "https://www.telenor.com.pk/customer/account/index/",
+      "https://www.telenor.com.pk/customer/account/dashboard",
+      "https://www.telenor.com.pk/customer/account/fnf",
+      "https://www.telenor.com.pk/customer/account/mystatements",
+      "https://www.telenor.com.pk/customer/account/rechargehistory",
+      "https://www.telenor.com.pk/customer/account/paymenthistory",
+      "https://www.telenor.com.pk/about",
+      "https://www.telenor.com.pk/about/about-telenor-pakistan/our-history",
+      "https://www.telenor.com.pk/about/careers",
+      "https://www.telenor.com.pk/about/corporate-social-responsibility",
+      "https://www.telenor.com.pk/about/media-center",
+      "https://www.telenor.com.pk/about/news-events",
+      "https://www.telenor.com.pk/help-support",
+      "https://www.telenor.com.pk/help-support/faq",
+      "https://www.telenor.com.pk/help-support/tutorials",
+      "https://www.telenor.com.pk/help-support/utilities",
+      "https://www.telenor.com.pk/help-support/contact-us",
+      "https://www.telenor.com.pk/checkout/cart/",
+      "https://www.telenor.com.pk/wishlist/",
+      "",
+      "https://www.telenor.com.pk/customer/account/login",
+      "#",
+      "/",
+      "https://www.telenor.com.pk/devices",
+      "https://www.telenor.com.pk/personal/devices/3g-device-check",
+      "https://www.facebook.com/TelenorPk",
+      "https://www.linkedin.com/company/2316977",
+      "https://twitter.com/telenorpakistan",
+      "https://www.telenor.com.pk/about/about-telenor-pakistan/our-history",
+      "https://www.telenor.com.pk/about/careers",
+      "https://www.telenor.com.pk/about/corporate-social-responsibility",
+      "https://www.telenor.com.pk/about/media-center",
+      "https://www.telenor.com.pk/clnews",
+      "https://www.telenor.com.pk/talkshawk",
+      "https://www.telenor.com.pk/djuice",
+      "https://www.telenor.com.pk/postpaid",
+      "https://www.telenor.com.pk/telenor-business",
+      "https://www.telenor.com.pk/internet",
+      "https://www.telenor.com.pk/personal/digital-services-main",
+      "https://www.telenor.com.pk/devices",
+      "https://www.telenor.com.pk/help-support/tutorials",
+      "https://www.telenor.com.pk/help-support/utilities/coveragemap",
+      "https://www.telenor.com.pk/help-support/utilities/bundle-calculator",
+      "https://www.telenor.com.pk/help-support/contact-us",
+      "https://www.telenor.com.pk/help-support/faq",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/telenor-business",
+      "https://www.telenor.com.pk/customer/account/index/",
+      "https://www.telenor.com.pk/about",
+      "https://www.telenor.com.pk/help-support",
+      "https://www.telenor.com.pk/",
+      "https://www.telenor.com.pk/talkshawk",
+      "https://www.telenor.com.pk/djuice",
+      "https://www.telenor.com.pk/telenor-business",
+      "https://www.telenor.com.pk/about/about-telenor-pakistan/terms-and-conditions",
+      "https://www.telenor.com.pk/warranty-and-returns",
+      "https://www.telenor.com.pk/privacy-policy",
+      "https://www.telenor.com.pk/sitemap"
+    ]
+  }
+}</tt>
